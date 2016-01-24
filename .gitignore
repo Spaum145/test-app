@@ -1,9 +1,15 @@
 ### Intellij ###
+*.iml
+
 ## Directory-based project format:
 .idea/
 
+## File-based project format:
+*.ipr
+*.iws
+
 ### Maven ###
-**/target/**
+server/target/**
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.next
