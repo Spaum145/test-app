@@ -1,0 +1,17 @@
+### Intellij ###
+## Directory-based project format:
+.idea/
+
+### Maven ###
+**/target/**
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
+### Java ###
+*.class
+# Package Files #
+*.jar
+*.war
+*.ear
