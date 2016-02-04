@@ -4,10 +4,11 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 /**
  * Registers the springSecurityFilterChain Filter for every URL in application
+ *
  * @author Fenix
  */
 
 
 public class SecurityInitializer
-        extends AbstractSecurityWebApplicationInitializer {
+		extends AbstractSecurityWebApplicationInitializer {
 }

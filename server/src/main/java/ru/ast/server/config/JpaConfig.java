@@ -3,7 +3,7 @@ package ru.ast.server.config;
 /**
  * @author Fenix
  */
-import java.util.Properties;
+
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,70 +18,72 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Properties;
+
 @Configuration
-@EnableJpaRepositories(basePackages={"ru.ast.server.domain.repository"})
+@EnableJpaRepositories(basePackages = {"ru.ast.server.domain.repository"})
 @EnableTransactionManagement
 public class JpaConfig implements DisposableBean {
 
-    private EmbeddedDatabase ed;
+	private EmbeddedDatabase ed;
 
-    @Bean(name="hsqlInMemory")
-    public EmbeddedDatabase hsqlInMemory() {
+	@Bean(name = "hsqlInMemory")
+	public EmbeddedDatabase hsqlInMemory() {
 
-        if ( this.ed == null ) {
-            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-            this.ed = builder.setType(EmbeddedDatabaseType.HSQL).build();
-        }
+		if (this.ed == null) {
+			EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+			this.ed = builder.setType(EmbeddedDatabaseType.HSQL).build();
+		}
 
-        return this.ed;
+		return this.ed;
 
-    }
+	}
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-        LocalContainerEntityManagerFactoryBean lcemfb
-                = new LocalContainerEntityManagerFactoryBean();
+		LocalContainerEntityManagerFactoryBean lcemfb
+				= new LocalContainerEntityManagerFactoryBean();
 
-        lcemfb.setDataSource(this.hsqlInMemory());
-        lcemfb.setPackagesToScan(new String[] {"ru.ast.server.domain.entity"});
-//        lcemfb.setPersistenceUnitName("MyPersistenceUnit");
+		lcemfb.setDataSource(this.hsqlInMemory());
+		lcemfb.setPackagesToScan(new String[]{"ru.ast.server.domain.entity"});
+//    lcemfb.setPersistenceUnitName("MyPersistenceUnit");
 
-        HibernateJpaVendorAdapter va = new HibernateJpaVendorAdapter();
-        lcemfb.setJpaVendorAdapter(va);
+		HibernateJpaVendorAdapter va = new HibernateJpaVendorAdapter();
+		lcemfb.setJpaVendorAdapter(va);
 
-        Properties ps = new Properties();
-        ps.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        ps.put("hibernate.hbm2ddl.auto", "create");
-        lcemfb.setJpaProperties(ps);
+		Properties ps = new Properties();
+		ps.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+		ps.put("hibernate.hbm2ddl.auto", "create");
+		lcemfb.setJpaProperties(ps);
 
-        lcemfb.afterPropertiesSet();
+		lcemfb.afterPropertiesSet();
 
-        return lcemfb;
+		return lcemfb;
 
-    }
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager(){
+	@Bean
+	public PlatformTransactionManager transactionManager() {
 
-        JpaTransactionManager tm = new JpaTransactionManager();
+		JpaTransactionManager tm = new JpaTransactionManager();
 
-        tm.setEntityManagerFactory(
-                this.entityManagerFactory().getObject() );
+		tm.setEntityManagerFactory(
+				this.entityManagerFactory().getObject());
 
-        return tm;
+		return tm;
 
-    }
+	}
 
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
 
-    public void destroy() {
+	public void destroy() {
 
-        if ( this.ed != null ) {
-            this.ed.shutdown();
-        }
-    }
+		if (this.ed != null) {
+			this.ed.shutdown();
+		}
+	}
 }
