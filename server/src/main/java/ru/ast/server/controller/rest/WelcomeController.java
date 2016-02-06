@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WelcomeController {
 
-	@RequestMapping(value = {"/", "/hello"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/hello"}, method = RequestMethod.GET)
 	public String welcomePage() {
 		return "welcome";
 	}

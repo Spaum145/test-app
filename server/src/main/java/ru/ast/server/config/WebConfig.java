@@ -48,6 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	/**
 	 * Create and configure Gson message converter
 	 * (used to marshall and unmarshall Java Objects to and from JSON over HTTP)
+	 * Gson chosen instead of Jackson (default) for being faster for small response body (not 100% sure)
 	 * @return
 	 */
 	private GsonHttpMessageConverter createGsonHttpMessageConverter() {
