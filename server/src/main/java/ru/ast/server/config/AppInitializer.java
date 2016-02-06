@@ -26,9 +26,13 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		};
 	}
 
+	/**
+	 * Configure DispatcherServlet (Spring's central servlet) mapping
+	 * @return
+	 */
 	@Override
 	protected String[] getServletMappings() {
-		return new String[]{"/app"};
+		return new String[]{"/"};
 	}
 
 	@Override
