@@ -1,24 +1,25 @@
 package ru.ast.server.controller.rest;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import ru.ast.server.controller.UrlConstants;
 import ru.ast.server.domain.entity.Question;
+import ru.ast.server.service.api.IQuestionService;
 
 /**
  * @author Fenix
  */
 
-@Controller
-@RequestMapping(value = "/q")
+@RestController
+@RequestMapping(value = UrlConstants.QUESTION_URL)
 public class QuestionController {
 
-	@RequestMapping(value = "/get")
-	@ResponseBody
-	public Question getQuestion() {
-		Question q1 = new Question();
-		q1.setQuestionId(1L);
-		q1.setContent("Content");
-		return q1;
+	@Autowired
+	private IQuestionService questionService;
+
+	@RequestMapping(value = UrlConstants.TEST_GET_URL)
+	public Question test() {
+		return questionService.testGet();
 	}
 }

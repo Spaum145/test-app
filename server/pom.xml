@@ -131,7 +131,6 @@
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-jstlel</artifactId>
-			<!--<version>1.2.1</version>-->
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -142,9 +141,8 @@
 			<artifactId>gson</artifactId>
 			<version>2.5</version>
 		</dependency>
-
 		<!-- Tests -->
-<!--		<dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -158,6 +156,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
-		</dependency>-->
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
